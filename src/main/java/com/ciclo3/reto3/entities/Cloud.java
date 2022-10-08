@@ -30,7 +30,7 @@ public class Cloud implements Serializable {
     private List<Message> messages;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "cloud")
-    @JsonIgnoreProperties({"cloud", "message"})
+    @JsonIgnoreProperties({"cloud", "messages"})
     public List<Reservation> reservations;
 
     public Integer getId() {
