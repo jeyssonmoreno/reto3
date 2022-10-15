@@ -24,7 +24,7 @@ public class ScoreService {
             return scoreRepository.save(score);
         }else{
             Optional<Score> e= scoreRepository.getScore(score.getIdScore());
-            if (e.isEmpty()){
+            if (e.isPresent()){
                 return scoreRepository.save(score);
             }else {
                 return score;
@@ -35,7 +35,7 @@ public class ScoreService {
     public Score update(Score score){
         if(score.getIdScore()!=null){
             Optional<Score> e = scoreRepository.getScore(score.getIdScore());
-            if (!e.isEmpty()){
+            if (!e.isPresent()){
                 if(score.getMessageText()!=null){
                     e.get().setMessageText(score.getMessageText());
                 }

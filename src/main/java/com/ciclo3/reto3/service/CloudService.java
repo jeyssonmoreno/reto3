@@ -23,7 +23,7 @@ public class CloudService {
             return cloudRepository.save(cloud);
         }else{
             Optional<Cloud> e= cloudRepository.getCloud(cloud.getId());
-            if (e.isEmpty()){
+            if (e.isPresent()){
                 return cloudRepository.save(cloud);
             }else {
                 return cloud;
@@ -34,7 +34,7 @@ public class CloudService {
     public Cloud update(Cloud uCloud){
         if(uCloud.getId()!=null){
             Optional<Cloud> e = cloudRepository.getCloud(uCloud.getId());
-            if (!e.isEmpty()){
+            if (!e.isPresent()){
                 if(uCloud.getName()!=null){
                     e.get().setName(uCloud.getName());
                 }

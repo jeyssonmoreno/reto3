@@ -1,5 +1,7 @@
 package com.ciclo3.reto3.controller;
 
+import com.ciclo3.reto3.entities.DTOs.CountClient;
+import com.ciclo3.reto3.entities.DTOs.CountStatus;
 import com.ciclo3.reto3.entities.Reservation;
 import com.ciclo3.reto3.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 @RestController
 @RequestMapping("/api/Reservation")
 public class ReservationController {
@@ -39,6 +42,21 @@ public class ReservationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id){
         return reservationService.delete(id);
+    }
+
+    @GetMapping("/report-clients")
+    public List<CountClient> getReportTopClients(){
+        return reservationService.getTopClients();
+    }
+
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservation> getReportReservationsDate(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo){
+        return reservationService.getReservationPeriod(dateOne, dateTwo);
+    }
+
+    @GetMapping("/report-status")
+    public CountStatus getReportStatusReservations(){
+        return reservationService.getReservationsStatus();
     }
 
 }

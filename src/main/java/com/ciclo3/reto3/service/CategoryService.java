@@ -25,7 +25,7 @@ public class CategoryService {
             return categoryRepository.save(category);
         }else{
             Optional<Category> e= categoryRepository.getCategory(category.getId());
-            if (e.isEmpty()){
+            if (e.isPresent()){
                 return categoryRepository.save(category);
             }else {
                 return category;
@@ -36,7 +36,7 @@ public class CategoryService {
     public Category update(Category category){
         if(category.getId()!=null){
             Optional<Category> e = categoryRepository.getCategory(category.getId());
-            if (!e.isEmpty()){
+            if (!e.isPresent()){
                 if(category.getName()!=null){
                     e.get().setName(category.getName());
                 }
