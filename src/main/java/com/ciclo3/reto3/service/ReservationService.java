@@ -4,15 +4,14 @@ import com.ciclo3.reto3.entities.DTOs.CountClient;
 import com.ciclo3.reto3.entities.DTOs.CountStatus;
 import com.ciclo3.reto3.entities.Reservation;
 import com.ciclo3.reto3.repository.ReservationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ReservationService {
@@ -30,7 +29,7 @@ public class ReservationService {
             return reservationRepository.save(reservation);
         }else{
             Optional<Reservation> e= reservationRepository.getReservation(reservation.getIdReservation());
-            if (e.isPresent()){
+            if (e.isEmpty()){
                 return reservationRepository.save(reservation);
             }else {
                 return reservation;
@@ -40,8 +39,8 @@ public class ReservationService {
 
     public Reservation update(Reservation reservation){
         if(reservation.getIdReservation()!=null){
-            Optional<Reservation> e = reservationRepository.getReservation(reservation.getIdReservation());
-            if (!e.isPresent()){
+            Optional<Reservation> e= reservationRepository.getReservation(reservation.getIdReservation());
+            if (!e.isEmpty()){
                 if(reservation.getStartDate()!=null){
                     e.get().setStartDate(reservation.getStartDate());
                 }

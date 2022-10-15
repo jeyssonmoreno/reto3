@@ -2,11 +2,10 @@ package com.ciclo3.reto3.service;
 
 import com.ciclo3.reto3.entities.Client;
 import com.ciclo3.reto3.repository.ClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ClientService {
@@ -22,7 +21,7 @@ public class ClientService {
             return clientRepository.save(client);
         }else{
             Optional<Client> e= clientRepository.getClient(client.getIdClient());
-            if (e.isPresent()){
+            if (e.isEmpty()){
                 return clientRepository.save(client);
             }else {
                 return client;
@@ -32,8 +31,8 @@ public class ClientService {
 
     public Client update(Client client){
         if(client.getIdClient()!=null){
-            Optional<Client> e = clientRepository.getClient(client.getIdClient());
-            if (!e.isPresent()){
+            Optional<Client> e= clientRepository.getClient(client.getIdClient());
+            if (!e.isEmpty()){
                 if(client.getName()!=null){
                     e.get().setName(client.getName());
                 }

@@ -2,11 +2,10 @@ package com.ciclo3.reto3.service;
 
 import com.ciclo3.reto3.entities.Score;
 import com.ciclo3.reto3.repository.ScoreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ScoreService {
@@ -24,7 +23,7 @@ public class ScoreService {
             return scoreRepository.save(score);
         }else{
             Optional<Score> e= scoreRepository.getScore(score.getIdScore());
-            if (e.isPresent()){
+            if (e.isEmpty()){
                 return scoreRepository.save(score);
             }else {
                 return score;
@@ -34,8 +33,8 @@ public class ScoreService {
 
     public Score update(Score score){
         if(score.getIdScore()!=null){
-            Optional<Score> e = scoreRepository.getScore(score.getIdScore());
-            if (!e.isPresent()){
+            Optional<Score> e= scoreRepository.getScore(score.getIdScore());
+            if (!e.isEmpty()){
                 if(score.getMessageText()!=null){
                     e.get().setMessageText(score.getMessageText());
                 }

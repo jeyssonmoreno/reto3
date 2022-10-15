@@ -2,11 +2,10 @@ package com.ciclo3.reto3.service;
 
 import com.ciclo3.reto3.entities.Admin;
 import com.ciclo3.reto3.repository.AdminRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AdminService {
@@ -23,7 +22,7 @@ public class AdminService {
             return adminRepository.save(admin);
         }else{
             Optional<Admin> e= adminRepository.getAdmin(admin.getIdAdmin());
-            if (e.isPresent()){
+            if(e.isEmpty()){
                 return adminRepository.save(admin);
             }else {
                 return admin;
@@ -33,8 +32,8 @@ public class AdminService {
 
     public Admin update(Admin admin){
         if(admin.getIdAdmin()!=null){
-            Optional<Admin> e = adminRepository.getAdmin(admin.getIdAdmin());
-            if (!e.isPresent()){
+            Optional<Admin> e= adminRepository.getAdmin(admin.getIdAdmin());
+            if(!e.isEmpty()){
                 if(admin.getName()!=null){
                     e.get().setName(admin.getName());
                 }

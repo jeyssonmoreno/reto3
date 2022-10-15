@@ -2,11 +2,10 @@ package com.ciclo3.reto3.service;
 
 import com.ciclo3.reto3.entities.Cloud;
 import com.ciclo3.reto3.repository.CloudRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class CloudService {
@@ -23,7 +22,7 @@ public class CloudService {
             return cloudRepository.save(cloud);
         }else{
             Optional<Cloud> e= cloudRepository.getCloud(cloud.getId());
-            if (e.isPresent()){
+            if (e.isEmpty()){
                 return cloudRepository.save(cloud);
             }else {
                 return cloud;
@@ -34,7 +33,7 @@ public class CloudService {
     public Cloud update(Cloud uCloud){
         if(uCloud.getId()!=null){
             Optional<Cloud> e = cloudRepository.getCloud(uCloud.getId());
-            if (!e.isPresent()){
+            if (!e.isEmpty()){
                 if(uCloud.getName()!=null){
                     e.get().setName(uCloud.getName());
                 }

@@ -2,11 +2,10 @@ package com.ciclo3.reto3.service;
 
 import com.ciclo3.reto3.entities.Message;
 import com.ciclo3.reto3.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class MessageService {
@@ -23,7 +22,7 @@ public class MessageService {
             return messageRepository.save(message);
         }else{
             Optional<Message> e= messageRepository.getMessage(message.getIdMessage());
-            if (e.isPresent()){
+            if (e.isEmpty()){
                 return messageRepository.save(message);
             }else {
                 return message;
@@ -33,8 +32,8 @@ public class MessageService {
 
     public Message update(Message message){
         if(message.getIdMessage()!=null){
-            Optional<Message> e = messageRepository.getMessage(message.getIdMessage());
-            if (!e.isPresent()){
+            Optional<Message> e= messageRepository.getMessage(message.getIdMessage());
+            if (!e.isEmpty()){
                 if(message.getMessageText()!=null){
                     e.get().setMessageText(message.getMessageText());
                 }
