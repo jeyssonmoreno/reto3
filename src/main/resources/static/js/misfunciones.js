@@ -274,7 +274,7 @@ function BorrarDetalle(){
      datatype:"JSON",
      success:function(respuesta){
          alert("Se ha borrado con éxito");
-         location.href="./index.html";
+         location.href="../privado.html";
      }
  });
  

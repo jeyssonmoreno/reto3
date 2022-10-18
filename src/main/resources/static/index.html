@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-   <meta charset="UTF-8">
-   <title>Cloud</title>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-   <script type="text/javascript" src="js/misfunciones.js"></script>
-
-</head>
-
-<body>
-
-    <h1>Alquiler de Nube de computo</h1>
-
-    <input type="button" onclick="location.href='clientes.html';" value="Registro de clientes" />
-    <input type="button" onclick="location.href='mensajes.html';" value="Registro de mensajes" />
-    <input type="button" onclick="location.href='nubes.html';" value="Creación de Nubes" />
-
-</body>
-
-</html>
+    <html lang="es">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <title>Cloud</title>
+        <meta name="Alquiler nubes">
+        <meta name="viewport" content="width=device-width"/>
+        <base href="/"/>
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    <h1>MisiónTIC 2022</h1>
+    <div class="container unauthenticated">
+        Para iniciar sesión con GitHub:
+        <a href="/oauth2/authorization/github">haz click</a>
+    </div>
+    <div class="container authenticated" style="display: none">
+        Autenticado como: <span id="user"></span>
+    </div>
+    </body>
+    <script type="text/javascript">
+        $.get("/user", function (data){
+            $("user").html(data.name);
+            $(".unauthenticated").hide()
+            $(".authenticated").show()
+        })
+    </script>
+    </html>
