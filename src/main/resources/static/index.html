@@ -19,14 +19,14 @@
     </div>
     <div class="container authenticated" style="display: none">
         Autenticado como: <span id="user"></span>
+        <input type="button" onclick="location.href='privado.html';" value="Ir a la app"/>
     </div>
     </body>
     <script type="text/javascript">
         $.get("/user", function (data){
-            $("user").html(data.name);
+            $("#user").html(data.name);
             $(".unauthenticated").hide()
             $(".authenticated").show()
-            Location.href='privado.html'
         })
     </script>
     </html>
